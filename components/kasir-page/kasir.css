@@ -1,0 +1,1380 @@
+/* kasir.css - Kasirly Kasir Page */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@300;400;600;700&display=swap');
+
+:root {
+  --white: #ffffff;
+  --blue-primary: #37B6FF;
+  --blue-dark: #0e9fe8;
+  --blue-light: #e8f7ff;
+  --blue-glow: rgba(55, 182, 255, 0.25);
+  --text-dark: #0d1b2a;
+  --text-mid: #3a4a5c;
+  --text-muted: #7a8fa6;
+  --border: rgba(55, 182, 255, 0.2);
+  --border-soft: rgba(0, 0, 0, 0.07);
+  --shadow-card: 0 4px 24px rgba(55, 182, 255, 0.08), 0 1px 6px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover: 0 12px 40px rgba(55, 182, 255, 0.16), 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-btn: 0 4px 20px rgba(55, 182, 255, 0.4);
+  --radius-card: 16px;
+  --radius-sm: 10px;
+  --radius-btn: 12px;
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ─── Page Shell ─── */
+.kasir-page {
+  min-height: 100vh;
+  background-color: #f0f8ff;
+  background-image:
+    radial-gradient(ellipse 70% 50% at 0% 0%, rgba(55,182,255,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 100% 100%, rgba(55,182,255,0.05) 0%, transparent 60%);
+  font-family: var(--font-body);
+  padding-top: 64px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ─── Top Bar ─── */
+.kasir-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: white;
+  border-bottom: 1px solid var(--border-soft);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  gap: 16px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.kasir-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.kasir-session-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.kasir-session-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kasir-session-id {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.3px;
+}
+
+.kasir-topbar-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--border-soft);
+}
+
+.kasir-clock {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.5px;
+  min-width: 80px;
+}
+
+.kasir-date {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.kasir-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.kasir-topbar-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: #fafcff;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+}
+
+.kasir-topbar-stat-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kasir-topbar-stat-icon.blue   { background: rgba(55,182,255,0.12); color: var(--blue-primary); }
+.kasir-topbar-stat-icon.green  { background: rgba(16,185,129,0.12); color: #10b981; }
+
+.kasir-topbar-stat-icon svg { width: 14px; height: 14px; }
+
+.kasir-topbar-stat-val {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.3px;
+  line-height: 1;
+}
+
+.kasir-topbar-stat-lbl {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* ─── Main Layout ─── */
+.kasir-main {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  flex: 1;
+  overflow: hidden;
+  gap: 0;
+}
+
+/* ══════════════════════════
+   LEFT — Product Panel
+══════════════════════════ */
+.kasir-products-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 20px 20px 16px 28px;
+  gap: 12px;
+}
+
+/* Search + Filter Bar */
+.kasir-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.kasir-search-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.kasir-search-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  width: 15px;
+  height: 15px;
+  pointer-events: none;
+}
+
+.kasir-search-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px 0 40px;
+  border: 1.5px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--text-dark);
+  background: white;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.kasir-search-input:focus {
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 0 3px var(--blue-glow);
+}
+
+.kasir-search-input::placeholder { color: #b8cad8; }
+
+/* Category Pills */
+.kasir-categories {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  flex-shrink: 0;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+
+.kasir-categories::-webkit-scrollbar { display: none; }
+
+.kasir-cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  border: 1.5px solid var(--border-soft);
+  background: white;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.18s;
+  font-family: var(--font-body);
+}
+
+.kasir-cat-pill:hover {
+  border-color: var(--blue-primary);
+  color: var(--blue-primary);
+  background: var(--blue-light);
+}
+
+.kasir-cat-pill.active {
+  background: var(--blue-primary);
+  border-color: var(--blue-primary);
+  color: white;
+  box-shadow: 0 3px 12px rgba(55,182,255,0.35);
+}
+
+/* Product Grid */
+.kasir-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+  grid-template-rows: repeat(2, 1fr);
+  grid-auto-rows: 0px;
+  gap: 12px;
+  overflow: hidden;
+  padding-right: 4px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Product Card */
+.kasir-product-card {
+  background: white;
+  border-radius: var(--radius-card);
+  border: 1.5px solid var(--border-soft);
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  min-height: 0;
+}
+
+.kasir-product-card:hover {
+  border-color: var(--blue-primary);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.kasir-product-card.out-of-stock {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.kasir-product-card.in-cart {
+  border-color: var(--blue-primary);
+  background: #f5fbff;
+}
+
+.kasir-product-card.in-cart::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue-primary), #0ea5e9);
+  border-radius: 3px 3px 0 0;
+  z-index: 1;
+}
+
+/* ── Top half: image/icon area ── */
+.kasir-product-img-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f9ff;
+  min-height: 0;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+}
+
+.kasir-product-card.in-cart .kasir-product-img-area {
+  background: #e8f4ff;
+}
+
+.kasir-product-emoji {
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1;
+  text-align: center;
+  display: block;
+}
+
+/* ── Bottom half: info area ── */
+.kasir-product-info-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 10px;
+  min-height: 0;
+  border-top: 1px solid var(--border-soft);
+}
+
+.kasir-product-name {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.kasir-product-price {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue-primary);
+  letter-spacing: -0.3px;
+}
+
+.kasir-product-stock {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.kasir-product-stock.low { color: #f59e0b; }
+.kasir-product-stock.critical { color: #ef4444; }
+
+.kasir-product-badge {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 20px;
+  height: 20px;
+  background: var(--blue-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  color: white;
+  font-family: var(--font-display);
+  z-index: 2;
+}
+
+/* Empty state */
+.kasir-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 10px;
+  color: var(--text-muted);
+}
+
+.kasir-empty-icon {
+  font-size: 40px;
+  opacity: 0.4;
+}
+
+.kasir-empty-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ─── Pagination ─── */
+.kasir-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 12px 4px 0;
+  gap: 12px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.kasir-pagination-info {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.kasir-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.kasir-page-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border-soft);
+  background: white;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-mid);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.kasir-page-btn:hover:not(:disabled) {
+  border-color: var(--blue-primary);
+  color: var(--blue-primary);
+  background: var(--blue-light);
+}
+
+.kasir-page-btn.active {
+  background: var(--blue-primary);
+  border-color: var(--blue-primary);
+  color: white;
+  box-shadow: 0 2px 8px rgba(55,182,255,0.35);
+}
+
+.kasir-page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.kasir-page-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border-soft);
+  background: white;
+  color: var(--text-mid);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.kasir-page-arrow:hover:not(:disabled) {
+  border-color: var(--blue-primary);
+  background: var(--blue-light);
+  color: var(--blue-primary);
+}
+
+.kasir-page-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ══════════════════════════
+   RIGHT — Cart Panel
+══════════════════════════ */
+.kasir-cart-panel {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-left: 1px solid var(--border-soft);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(55,182,255,0.15) transparent;
+}
+
+.kasir-cart-panel::-webkit-scrollbar { width: 4px; }
+.kasir-cart-panel::-webkit-scrollbar-thumb {
+  background: rgba(55,182,255,0.15);
+  border-radius: 99px;
+}
+
+.kasir-cart-header {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--border-soft);
+  flex-shrink: 0;
+}
+
+.kasir-cart-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kasir-cart-count {
+  background: var(--blue-primary);
+  color: white;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 800;
+  font-family: var(--font-display);
+}
+
+.kasir-cart-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* Customer field */
+.kasir-customer-field {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border-soft);
+  flex-shrink: 0;
+}
+
+.kasir-customer-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.kasir-customer-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px;
+  border: 1.5px solid var(--border-soft);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-dark);
+  background: #fafcff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.kasir-customer-input:focus {
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 0 3px var(--blue-glow);
+}
+
+.kasir-customer-input::placeholder { color: #b8cad8; }
+
+/* Cart Items */
+.kasir-cart-items {
+  padding: 8px 0;
+}
+
+.kasir-cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 10px;
+  padding: 40px 20px;
+}
+
+.kasir-cart-empty-icon { font-size: 44px; opacity: 0.25; }
+
+.kasir-cart-empty-text {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.kasir-cart-empty-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  opacity: 0.7;
+  text-align: center;
+}
+
+/* Cart Item Row */
+.kasir-cart-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  transition: background 0.15s;
+}
+
+.kasir-cart-item:hover { background: #fafcff; }
+.kasir-cart-item:last-child { border-bottom: none; }
+
+.kasir-cart-item-emoji {
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f8fb;
+  border-radius: 8px;
+}
+
+.kasir-cart-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.kasir-cart-item-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kasir-cart-item-price {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.kasir-cart-item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.kasir-cart-item-subtotal {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* Qty Controls */
+.kasir-qty {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid var(--border-soft);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.kasir-qty-btn {
+  width: 26px;
+  height: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-mid);
+  transition: background 0.15s, color 0.15s;
+  font-family: var(--font-body);
+}
+
+.kasir-qty-btn:hover {
+  background: var(--blue-light);
+  color: var(--blue-primary);
+}
+
+.kasir-qty-btn.remove:hover {
+  background: rgba(239,68,68,0.08);
+  color: #ef4444;
+}
+
+.kasir-qty-val {
+  min-width: 28px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  border-left: 1.5px solid var(--border-soft);
+  border-right: 1.5px solid var(--border-soft);
+}
+
+/* ─── Cart Footer ─── */
+.kasir-cart-footer {
+  border-top: 1px solid var(--border-soft);
+  flex-shrink: 0;
+}
+
+/* Summary */
+.kasir-summary {
+  padding: 14px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.kasir-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kasir-summary-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.kasir-summary-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dark);
+  font-family: var(--font-display);
+}
+
+.kasir-summary-val.green { color: #10b981; }
+.kasir-summary-val.red   { color: #ef4444; }
+
+/* Discount row */
+.kasir-discount-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.kasir-discount-input {
+  width: 70px;
+  height: 28px;
+  padding: 0 8px;
+  border: 1.5px solid var(--border-soft);
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  background: #fafcff;
+  outline: none;
+  text-align: right;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.kasir-discount-input:focus {
+  border-color: var(--blue-primary);
+}
+
+.kasir-discount-unit {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Divider */
+.kasir-summary-divider {
+  height: 1px;
+  background: var(--border-soft);
+  margin: 6px 0;
+}
+
+/* Total */
+.kasir-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.kasir-total-label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.kasir-total-val {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.8px;
+}
+
+/* Payment method */
+.kasir-payment-methods {
+  padding: 0 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.kasir-payment-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.kasir-payment-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.kasir-payment-opt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 6px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border-soft);
+  background: #fafcff;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: var(--font-body);
+}
+
+.kasir-payment-opt:hover {
+  border-color: var(--blue-primary);
+  background: var(--blue-light);
+}
+
+.kasir-payment-opt.active {
+  border-color: var(--blue-primary);
+  background: var(--blue-light);
+  box-shadow: 0 2px 8px rgba(55,182,255,0.2);
+}
+
+.kasir-payment-opt-icon { font-size: 18px; }
+
+.kasir-payment-opt-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-mid);
+}
+
+.kasir-payment-opt.active .kasir-payment-opt-label {
+  color: var(--blue-primary);
+}
+
+/* Cash input */
+.kasir-cash-input-wrap {
+  padding: 0 20px 12px;
+  flex-shrink: 0;
+}
+
+.kasir-cash-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.kasir-cash-input-inner {
+  position: relative;
+}
+
+.kasir-cash-prefix {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.kasir-cash-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px 0 36px;
+  border: 1.5px solid var(--border-soft);
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  background: #fafcff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.kasir-cash-input:focus {
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 0 3px var(--blue-glow);
+}
+
+.kasir-quick-cash {
+  display: flex;
+  gap: 5px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.kasir-quick-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border-soft);
+  background: white;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.kasir-quick-btn:hover {
+  border-color: var(--blue-primary);
+  background: var(--blue-light);
+  color: var(--blue-primary);
+}
+
+/* Action Buttons */
+.kasir-actions {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.kasir-btn-pay {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(135deg, var(--blue-primary), #0ea5e9);
+  color: white;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  box-shadow: var(--shadow-btn);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.2px;
+}
+
+.kasir-btn-pay:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(55,182,255,0.55);
+}
+
+.kasir-btn-pay:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.kasir-btn-pay svg { width: 18px; height: 18px; }
+
+.kasir-btn-clear {
+  width: 100%;
+  height: 36px;
+  background: none;
+  border: 1.5px solid rgba(239,68,68,0.2);
+  border-radius: var(--radius-btn);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #ef4444;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.kasir-btn-clear:hover:not(:disabled) {
+  background: rgba(239,68,68,0.06);
+  border-color: rgba(239,68,68,0.4);
+}
+
+.kasir-btn-clear:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ══════════════════════════
+   MODAL — Payment
+══════════════════════════ */
+.kasir-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 27, 42, 0.55);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.kasir-modal {
+  background: white;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.18), 0 8px 24px rgba(0,0,0,0.1);
+  animation: slideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.kasir-modal-header {
+  padding: 24px 24px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.kasir-modal-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.5px;
+}
+
+.kasir-modal-subtitle {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.kasir-modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: #f0f4f8;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.kasir-modal-close:hover { background: #e2e8f0; }
+
+.kasir-modal-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Summary in modal */
+.kasir-modal-summary {
+  background: #f5faff;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kasir-modal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kasir-modal-row-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.kasir-modal-row-val {
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.kasir-modal-divider {
+  height: 1px;
+  background: var(--border-soft);
+}
+
+.kasir-modal-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kasir-modal-total-label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.kasir-modal-total-val {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--blue-primary);
+  letter-spacing: -0.8px;
+}
+
+/* Change highlight */
+.kasir-change-box {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 1.5px solid rgba(16,185,129,0.25);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kasir-change-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #065f46;
+}
+
+.kasir-change-val {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: #10b981;
+  letter-spacing: -0.5px;
+}
+
+.kasir-change-box.insufficient {
+  background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+  border-color: rgba(239,68,68,0.25);
+}
+
+.kasir-change-box.insufficient .kasir-change-label { color: #991b1b; }
+.kasir-change-box.insufficient .kasir-change-val   { color: #ef4444; }
+
+.kasir-modal-footer {
+  padding: 0 24px 24px;
+  display: flex;
+  gap: 10px;
+}
+
+.kasir-modal-btn-cancel {
+  flex: 1;
+  height: 46px;
+  background: none;
+  border: 1.5px solid var(--border-soft);
+  border-radius: var(--radius-btn);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.kasir-modal-btn-cancel:hover {
+  background: #f5f8fb;
+  border-color: #d0dae5;
+}
+
+.kasir-modal-btn-confirm {
+  flex: 2;
+  height: 46px;
+  background: linear-gradient(135deg, var(--blue-primary), #0ea5e9);
+  color: white;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  box-shadow: var(--shadow-btn);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.kasir-modal-btn-confirm:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(55,182,255,0.5);
+}
+
+.kasir-modal-btn-confirm:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ══════════════════════════
+   SUCCESS Modal
+══════════════════════════ */
+.kasir-success-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px;
+  text-align: center;
+  gap: 8px;
+}
+
+.kasir-success-icon {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, #10b981, #34d399);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  box-shadow: 0 8px 24px rgba(16,185,129,0.35);
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.kasir-success-icon svg {
+  width: 36px;
+  height: 36px;
+  color: white;
+}
+
+.kasir-success-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.5px;
+}
+
+.kasir-success-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.kasir-success-amount {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--blue-primary);
+  letter-spacing: -1px;
+}
+
+.kasir-success-change {
+  font-size: 14px;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.kasir-success-btn {
+  margin-top: 16px;
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(135deg, var(--blue-primary), #0ea5e9);
+  color: white;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: transform 0.2s;
+}
+
+.kasir-success-btn:hover { transform: translateY(-1px); }
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .kasir-main {
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .kasir-page {
+    overflow: auto;
+    height: auto;
+  }
+  .kasir-main {
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+  .kasir-cart-panel {
+    border-left: none;
+    border-top: 1px solid var(--border-soft);
+  }
+  .kasir-products-panel {
+    padding: 16px;
+  }
+  .kasir-topbar {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}

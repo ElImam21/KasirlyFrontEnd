@@ -19,8 +19,25 @@
   }
 }
 
+html {
+  scrollbar-width: none;
+  overflow: hidden;
+  height: 100%;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  scrollbar-width: none;
+  overflow: hidden;
+  height: 100%;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
