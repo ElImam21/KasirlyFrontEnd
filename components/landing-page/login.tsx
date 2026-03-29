@@ -94,39 +94,48 @@ const SocialButtons = () => (
 ══════════════════════════════════════════════ */
 
 /* ── LOGIN FORM ── */
-const LoginForm = ({ onSubmit }: { onSubmit: () => void }) => (
+const LoginForm = ({ onSubmit, onSwitch }: { onSubmit: () => void; onSwitch: () => void }) => (
   <div className="auth-panel-form">
     {/* TOP ANCHOR */}
     <Logo />
 
-    {/* MIDDLE — centred */}
-    <div className="auth-form-body">
-      <h1 className="auth-form-title">Selamat datang<br />kembali 👋</h1>
-      <p className="auth-form-subtitle">Masuk untuk mengelola toko Anda dengan mudah</p>
+    {/* WHITE CARD (mobile: rounded card; desktop: transparent wrapper) */}
+    <div className="auth-mobile-card">
+      {/* MIDDLE — centred */}
+      <div className="auth-form-body">
+        <h1 className="auth-form-title">Selamat datang<br />kembali 👋</h1>
+        <p className="auth-form-subtitle">Masuk untuk mengelola toko Anda dengan mudah</p>
 
-      <div className="auth-field">
-        <label>Email</label>
-        <div className="auth-field-inner">
-          <IconMail />
-          <input type="email" placeholder="nama@email.com" />
+        <div className="auth-field">
+          <label>Email</label>
+          <div className="auth-field-inner">
+            <IconMail />
+            <input type="email" placeholder="nama@email.com" />
+          </div>
         </div>
+
+        <div className="auth-field">
+          <label>Kata Sandi</label>
+          <div className="auth-field-inner">
+            <IconLock />
+            <input type="password" placeholder="Masukkan kata sandi" />
+          </div>
+        </div>
+
+        <div className="auth-forgot"><a href="#">Lupa kata sandi?</a></div>
+        <button className="auth-btn-primary" onClick={onSubmit}>Masuk ke Akun</button>
+        <div className="auth-divider"><span>atau lanjutkan dengan</span></div>
       </div>
 
-      <div className="auth-field">
-        <label>Kata Sandi</label>
-        <div className="auth-field-inner">
-          <IconLock />
-          <input type="password" placeholder="Masukkan kata sandi" />
-        </div>
-      </div>
+      {/* BOTTOM ANCHOR */}
+      <SocialButtons />
 
-      <div className="auth-forgot"><a href="#">Lupa kata sandi?</a></div>
-      <button className="auth-btn-primary" onClick={onSubmit}>Masuk ke Akun</button>
-      <div className="auth-divider"><span>atau lanjutkan dengan</span></div>
+      {/* MOBILE ONLY: switch to register */}
+      <div className="auth-mobile-switch">
+        <span>Belum punya akun?</span>
+        <button onClick={onSwitch}>Daftar Sekarang</button>
+      </div>
     </div>
-
-    {/* BOTTOM ANCHOR */}
-    <SocialButtons />
   </div>
 );
 
@@ -211,49 +220,58 @@ const RegisterInfo = ({ onSwitch }: { onSwitch: () => void }) => (
 );
 
 /* ── REGISTER FORM ── */
-const RegisterForm = ({ onSubmit }: { onSubmit: () => void }) => (
+const RegisterForm = ({ onSubmit, onSwitch }: { onSubmit: () => void; onSwitch: () => void }) => (
   <div className="auth-panel-form">
     {/* TOP ANCHOR */}
     <Logo />
 
-    {/* MIDDLE — centred */}
-    <div className="auth-form-body">
-      <h1 className="auth-form-title">Buat Akun Baru ✨</h1>
-      <p className="auth-form-subtitle">Bergabunglah dan mulai kelola toko Anda hari ini</p>
+    {/* WHITE CARD (mobile: rounded card; desktop: transparent wrapper) */}
+    <div className="auth-mobile-card">
+      {/* MIDDLE — centred */}
+      <div className="auth-form-body">
+        <h1 className="auth-form-title">Buat Akun Baru ✨</h1>
+        <p className="auth-form-subtitle">Bergabunglah dan mulai kelola toko Anda hari ini</p>
 
-      <div className="auth-field">
-        <label>Email</label>
-        <div className="auth-field-inner">
-          <IconMail />
-          <input type="email" placeholder="nama@email.com" />
+        <div className="auth-field">
+          <label>Email</label>
+          <div className="auth-field-inner">
+            <IconMail />
+            <input type="email" placeholder="nama@email.com" />
+          </div>
         </div>
-      </div>
 
-      <div className="auth-field">
-        <label>Kata Sandi</label>
-        <div className="auth-field-inner">
-          <IconLock />
-          <input type="password" placeholder="Buat kata sandi" />
+        <div className="auth-field">
+          <label>Kata Sandi</label>
+          <div className="auth-field-inner">
+            <IconLock />
+            <input type="password" placeholder="Buat kata sandi" />
+          </div>
         </div>
+
+        <div className="auth-checkbox">
+          <input type="checkbox" id="terms" />
+          <label htmlFor="terms">
+            Saya menyetujui{" "}
+            <a href="#">Syarat &amp; Ketentuan</a>
+            {" "}dan{" "}
+            <a href="#">Kebijakan Privasi</a>
+            {" "}yang berlaku
+          </label>
+        </div>
+
+        <button className="auth-btn-primary" onClick={onSubmit}>Buat Akun</button>
+        <div className="auth-divider"><span>atau daftar dengan</span></div>
       </div>
 
-      <div className="auth-checkbox">
-        <input type="checkbox" id="terms" />
-        <label htmlFor="terms">
-          Saya menyetujui{" "}
-          <a href="#">Syarat &amp; Ketentuan</a>
-          {" "}dan{" "}
-          <a href="#">Kebijakan Privasi</a>
-          {" "}yang berlaku
-        </label>
-      </div>
+      {/* BOTTOM ANCHOR */}
+      <SocialButtons />
 
-      <button className="auth-btn-primary" onClick={onSubmit}>Buat Akun</button>
-      <div className="auth-divider"><span>atau daftar dengan</span></div>
+      {/* MOBILE ONLY: switch to login */}
+      <div className="auth-mobile-switch">
+        <span>Sudah punya akun?</span>
+        <button onClick={onSwitch}>Masuk Sekarang</button>
+      </div>
     </div>
-
-    {/* BOTTOM ANCHOR */}
-    <SocialButtons />
   </div>
 );
 
@@ -281,29 +299,58 @@ const REGISTER_IDLE: Panels = {
   rightRegForm:   "visible",
 };
 
+/* ── MOBILE VIEW ──
+   Renders only ONE form at a time — no panel stacking, no z-index issues.
+   Simple fade transition between login and register.
+*/
+const MobileView = ({
+  mode,
+  onSubmit,
+  onSwitch,
+}: {
+  mode: "login" | "register";
+  onSubmit: () => void;
+  onSwitch: () => void;
+}) => (
+  <div className="auth-mobile-view">
+    {mode === "login" ? (
+      <LoginForm onSubmit={onSubmit} onSwitch={onSwitch} />
+    ) : (
+      <RegisterForm onSubmit={onSubmit} onSwitch={onSwitch} />
+    )}
+  </div>
+);
+
 export default function AuthPage() {
   const router = useRouter();
+
+  /* Desktop panel state */
   const [panels, setPanels] = useState<Panels>(LOGIN_IDLE);
   const [busy,   setBusy]   = useState(false);
+
+  /* Mobile view state — completely separate from panel state machine */
+  const [mobileMode, setMobileMode] = useState<"login" | "register">("login");
+  const [mobileFading, setMobileFading] = useState(false);
 
   const handleRedirect = () => {
     router.push("/client/home");
   };
 
-  const switchTo = (target: "login" | "register") => {
+  /* Desktop switch */
+  const switchDesktop = (target: "login" | "register") => {
     if (busy) return;
     setBusy(true);
 
     if (target === "register") {
       setPanels({ leftLoginForm: "exit-l", rightLoginInfo: "exit-r", leftRegInfo: "stand-l", rightRegForm: "stand-r" });
-      requestAnimationFrame(() => requestAnimationFrame(() => {
+      setTimeout(() => {
         setPanels({ leftLoginForm: "exit-l", rightLoginInfo: "exit-r", leftRegInfo: "visible", rightRegForm: "visible" });
-      }));
+      }, 50);
     } else {
       setPanels({ leftLoginForm: "stand-l", rightLoginInfo: "stand-r", leftRegInfo: "exit-l", rightRegForm: "exit-r" });
-      requestAnimationFrame(() => requestAnimationFrame(() => {
+      setTimeout(() => {
         setPanels({ leftLoginForm: "visible", rightLoginInfo: "visible", leftRegInfo: "exit-l", rightRegForm: "exit-r" });
-      }));
+      }, 50);
     }
 
     setTimeout(() => {
@@ -312,15 +359,35 @@ export default function AuthPage() {
     }, 620);
   };
 
+  /* Mobile switch — simple fade out → swap content → fade in */
+  const switchMobile = (target: "login" | "register") => {
+    if (mobileFading) return;
+    setMobileFading(true);
+    setTimeout(() => {
+      setMobileMode(target);
+      setMobileFading(false);
+    }, 250);
+  };
+
   const cls = (s: PanelState) => `auth-panel state-${s}`;
 
   return (
     <div className="auth-page">
-      <div className="auth-card">
-        <div className={`${cls(panels.leftLoginForm)} auth-panel-left`}><LoginForm onSubmit={handleRedirect} /></div>
-        <div className={`${cls(panels.rightLoginInfo)} auth-panel-right`}><LoginInfo onSwitch={() => switchTo("register")} /></div>
-        <div className={`${cls(panels.leftRegInfo)} auth-panel-left`}><RegisterInfo onSwitch={() => switchTo("login")} /></div>
-        <div className={`${cls(panels.rightRegForm)} auth-panel-right`}><RegisterForm onSubmit={handleRedirect} /></div>
+      {/* ── MOBILE LAYOUT (≤768px) — single form, no panel stacking ── */}
+      <div className={`auth-mobile-wrapper${mobileFading ? " auth-mobile-fading" : ""}`}>
+        <MobileView
+          mode={mobileMode}
+          onSubmit={handleRedirect}
+          onSwitch={() => switchMobile(mobileMode === "login" ? "register" : "login")}
+        />
+      </div>
+
+      {/* ── DESKTOP LAYOUT (>768px) — original panel state machine ── */}
+      <div className="auth-card auth-desktop-only">
+        <div className={`${cls(panels.leftLoginForm)} auth-panel-left`}><LoginForm onSubmit={handleRedirect} onSwitch={() => switchDesktop("register")} /></div>
+        <div className={`${cls(panels.rightLoginInfo)} auth-panel-right`}><LoginInfo onSwitch={() => switchDesktop("register")} /></div>
+        <div className={`${cls(panels.leftRegInfo)} auth-panel-left`}><RegisterInfo onSwitch={() => switchDesktop("login")} /></div>
+        <div className={`${cls(panels.rightRegForm)} auth-panel-right`}><RegisterForm onSubmit={handleRedirect} onSwitch={() => switchDesktop("login")} /></div>
       </div>
     </div>
   );

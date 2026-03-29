@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import "./navbar.css";
 
 /* ─── Icons ─── */
@@ -75,9 +75,15 @@ const IconLogout = () => (
 /* ─── Navbar Component ─── */
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
+
+  const handleLogout = () => {
+    setMobileOpen(false);
+    router.push("/");
+  };
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -175,7 +181,7 @@ export default function Navbar() {
           {/* Right: Avatar + Logout */}
           <div className="navbar-right">
             <div className="navbar-avatar">A</div>
-            <button className="navbar-btn-logout">
+            <button className="navbar-btn-logout" onClick={handleLogout}>
               <IconLogout />
               Logout
             </button>
@@ -228,7 +234,7 @@ export default function Navbar() {
 
         <div className="navbar-mobile-divider" />
 
-        <button className="navbar-mobile-link navbar-mobile-logout">
+        <button className="navbar-mobile-link navbar-mobile-logout" onClick={handleLogout}>
           <IconLogout />
           Logout
         </button>
