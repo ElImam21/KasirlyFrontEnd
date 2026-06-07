@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kasirly Frontend
 
-## Getting Started
+> Platform kasir digital all-in-one untuk mengelola transaksi, stok, dan laporan laba secara real-time.
 
-First, run the development server:
+🌐 **Live:** [kasirly.vercel.app](https://kasirly.vercel.app)
+
+---
+
+## Tentang Proyek
+
+Kasirly adalah aplikasi kasir berbasis web yang dirancang untuk membantu pemilik toko mengelola bisnis mereka secara lebih efisien. Dengan tampilan yang bersih dan modern, Kasirly menyediakan fitur kasir digital, manajemen stok, hingga laporan keuangan emuanya dalam satu platform.
+
+---
+
+## Fitur Utama
+
+- **Kasir Digital** — Transaksi cepat, akurat, dan tanpa batas
+- **Manajemen Stok Real-time** — Notifikasi otomatis saat stok habis
+- **Laporan Laba & Rugi** — Dashboard harian yang mudah dipahami
+- **Export PDF** — Unduh laporan keuangan kapan saja
+- **Autentikasi Lengkap** — Login/Register via Email, Google, atau Facebook
+
+---
+
+## Tech Stack
+
+| Teknologi | Versi |
+|---|---|
+| [Next.js](https://nextjs.org) | 16.2.0 |
+| [React](https://react.dev) | 19.2.4 |
+| [TypeScript](https://www.typescriptlang.org) | ^5 |
+| [Tailwind CSS](https://tailwindcss.com) | ^4 |
+
+---
+
+## Struktur Proyek
+
+```
+kasirly-frontend/
+├── app/           # Halaman & routing (Next.js App Router)
+├── components/    # Komponen UI yang dapat digunakan ulang
+├── public/        # Aset statis (gambar, logo, dll)
+├── next.config.ts
+├── tailwind.config
+└── tsconfig.json
+```
+
+---
+
+## Memulai (Development)
+
+### Prasyarat
+
+- Node.js >= 18
+- npm / yarn / pnpm / bun
+
+### Instalasi
+
+```bash
+# Clone repository
+git clone https://github.com/ElImam21/KasirlyFrontEnd.git
+cd KasirlyFrontEnd
+
+# Install dependencies
+npm install
+```
+
+### Menjalankan Dev Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3000](http://localhost:3000) di browser untuk melihat hasilnya.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build untuk Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Script | Fungsi |
+|---|---|
+| `npm run dev` | Menjalankan development server |
+| `npm run build` | Build untuk production |
+| `npm run start` | Menjalankan production server |
+| `npm run lint` | Menjalankan ESLint |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Proyek ini di-deploy menggunakan **[Vercel](https://vercel.com)**. Setiap push ke branch `main` akan otomatis ter-deploy ke [kasirly.vercel.app](https://kasirly.vercel.app).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Lisensi
+
+Private — Hak cipta © 2026 Hakimi Junior. Semua hak dilindungi.
