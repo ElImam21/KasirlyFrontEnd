@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import "./profile.css";
 
 /* ══════════════════════════════════════════════
@@ -477,7 +478,15 @@ const IconShieldLock = () => (
       strokeWidth="1.3"
       strokeLinejoin="round"
     />
-    <rect x="5.5" y="7.5" width="5" height="4" rx="1" stroke="currentColor" strokeWidth="1.2" />
+    <rect
+      x="5.5"
+      y="7.5"
+      width="5"
+      height="4"
+      rx="1"
+      stroke="currentColor"
+      strokeWidth="1.2"
+    />
     <path
       d="M6.5 7.5V6C6.5 4.895 7.172 4 8 4C8.828 4 9.5 4.895 9.5 6V7.5"
       stroke="currentColor"
@@ -534,6 +543,7 @@ function ActivityIcon({ type, color }: { type: string; color: string }) {
    MAIN COMPONENT
 ══════════════════════════════════════════════ */
 export default function ProfilePage() {
+  const router = useRouter();
   /* ── Profile form ── */
   const [profile, setProfile] = useState<ProfileForm>({
     nama: "Admin Kasirly",
@@ -608,6 +618,11 @@ export default function ProfilePage() {
 
   const handlePrefsSave = () => {
     showToast(setPrefsToast, "success");
+  };
+
+  const handleEnterSecureArea = () => {
+    // TODO: nanti tambahkan validasi PIN/password di sini sebelum redirect
+    router.push("/scure-area/home");
   };
 
   return (
@@ -778,294 +793,302 @@ export default function ProfilePage() {
 
         {/* ══ KEAMANAN + PREFERENSI (2 kolom) ══ */}
         <div className="profile-two-col">
-
-        {/* ══ KEAMANAN ══ */}
-        <div className="profile-card">
-          <div className="profile-card-header">
-            <div className="profile-card-title">
-              <div className="profile-card-title-icon orange">
-                <IconLock />
+          {/* ══ KEAMANAN ══ */}
+          <div className="profile-card">
+            <div className="profile-card-header">
+              <div className="profile-card-title">
+                <div className="profile-card-title-icon orange">
+                  <IconLock />
+                </div>
+                Keamanan Akun
               </div>
-              Keamanan Akun
             </div>
-          </div>
-          <div className="profile-card-body">
-            <div className="profile-form-grid">
-              <div className="profile-field span2">
-                <label className="profile-field-label">Password Saat Ini</label>
-                <div className="profile-field-inner profile-input-pw-wrap">
-                  <IconLock />
-                  <input
-                    className="profile-input"
-                    type={showPw.current ? "text" : "password"}
-                    value={pwForm.current}
-                    onChange={(e) =>
-                      setPwForm((p) => ({ ...p, current: e.target.value }))
-                    }
-                    placeholder="Masukkan password saat ini"
-                  />
-                  <button
-                    className="profile-pw-toggle"
-                    type="button"
-                    onClick={() =>
-                      setShowPw((s) => ({ ...s, current: !s.current }))
-                    }
-                  >
-                    {showPw.current ? <IconEyeOff /> : <IconEye />}
-                  </button>
+            <div className="profile-card-body">
+              <div className="profile-form-grid">
+                <div className="profile-field span2">
+                  <label className="profile-field-label">
+                    Password Saat Ini
+                  </label>
+                  <div className="profile-field-inner profile-input-pw-wrap">
+                    <IconLock />
+                    <input
+                      className="profile-input"
+                      type={showPw.current ? "text" : "password"}
+                      value={pwForm.current}
+                      onChange={(e) =>
+                        setPwForm((p) => ({ ...p, current: e.target.value }))
+                      }
+                      placeholder="Masukkan password saat ini"
+                    />
+                    <button
+                      className="profile-pw-toggle"
+                      type="button"
+                      onClick={() =>
+                        setShowPw((s) => ({ ...s, current: !s.current }))
+                      }
+                    >
+                      {showPw.current ? <IconEyeOff /> : <IconEye />}
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              <div className="profile-field">
-                <label className="profile-field-label">Password Baru</label>
-                <div className="profile-field-inner profile-input-pw-wrap">
-                  <IconLock />
-                  <input
-                    className="profile-input"
-                    type={showPw.newPw ? "text" : "password"}
-                    value={pwForm.newPw}
-                    onChange={(e) =>
-                      setPwForm((p) => ({ ...p, newPw: e.target.value }))
-                    }
-                    placeholder="Min. 8 karakter"
-                  />
-                  <button
-                    className="profile-pw-toggle"
-                    type="button"
-                    onClick={() =>
-                      setShowPw((s) => ({ ...s, newPw: !s.newPw }))
-                    }
-                  >
-                    {showPw.newPw ? <IconEyeOff /> : <IconEye />}
-                  </button>
-                </div>
-                {pwForm.newPw.length > 0 && (
-                  <>
-                    <div className="profile-pw-strength">
-                      <div className="profile-pw-strength-bars">
-                        {[1, 2, 3].map((i) => (
-                          <div
-                            key={i}
-                            className={`profile-pw-strength-bar ${i <= pwStrength.level ? `active ${pwStrength.cls}` : ""}`}
-                          />
-                        ))}
+                <div className="profile-field">
+                  <label className="profile-field-label">Password Baru</label>
+                  <div className="profile-field-inner profile-input-pw-wrap">
+                    <IconLock />
+                    <input
+                      className="profile-input"
+                      type={showPw.newPw ? "text" : "password"}
+                      value={pwForm.newPw}
+                      onChange={(e) =>
+                        setPwForm((p) => ({ ...p, newPw: e.target.value }))
+                      }
+                      placeholder="Min. 8 karakter"
+                    />
+                    <button
+                      className="profile-pw-toggle"
+                      type="button"
+                      onClick={() =>
+                        setShowPw((s) => ({ ...s, newPw: !s.newPw }))
+                      }
+                    >
+                      {showPw.newPw ? <IconEyeOff /> : <IconEye />}
+                    </button>
+                  </div>
+                  {pwForm.newPw.length > 0 && (
+                    <>
+                      <div className="profile-pw-strength">
+                        <div className="profile-pw-strength-bars">
+                          {[1, 2, 3].map((i) => (
+                            <div
+                              key={i}
+                              className={`profile-pw-strength-bar ${i <= pwStrength.level ? `active ${pwStrength.cls}` : ""}`}
+                            />
+                          ))}
+                        </div>
+                        <span
+                          className={`profile-pw-strength-label ${pwStrength.cls}`}
+                        >
+                          {pwStrength.label}
+                        </span>
                       </div>
-                      <span
-                        className={`profile-pw-strength-label ${pwStrength.cls}`}
-                      >
-                        {pwStrength.label}
+                      <span className="profile-field-hint">
+                        Gunakan huruf besar, angka, dan simbol untuk password
+                        yang kuat.
                       </span>
-                    </div>
-                    <span className="profile-field-hint">
-                      Gunakan huruf besar, angka, dan simbol untuk password yang
-                      kuat.
+                    </>
+                  )}
+                </div>
+
+                <div className="profile-field">
+                  <label className="profile-field-label">
+                    Konfirmasi Password Baru
+                  </label>
+                  <div className="profile-field-inner profile-input-pw-wrap">
+                    <IconLock />
+                    <input
+                      className="profile-input"
+                      type={showPw.confirm ? "text" : "password"}
+                      value={pwForm.confirm}
+                      onChange={(e) =>
+                        setPwForm((p) => ({ ...p, confirm: e.target.value }))
+                      }
+                      placeholder="Ulangi password baru"
+                    />
+                    <button
+                      className="profile-pw-toggle"
+                      type="button"
+                      onClick={() =>
+                        setShowPw((s) => ({ ...s, confirm: !s.confirm }))
+                      }
+                    >
+                      {showPw.confirm ? <IconEyeOff /> : <IconEye />}
+                    </button>
+                  </div>
+                  {pwMismatch && (
+                    <span className="profile-field-hint error">
+                      Password tidak cocok.
                     </span>
-                  </>
-                )}
+                  )}
+                  {!pwMismatch && pwForm.confirm.length > 0 && (
+                    <span className="profile-field-hint success">
+                      ✓ Password cocok.
+                    </span>
+                  )}
+                </div>
               </div>
 
-              <div className="profile-field">
-                <label className="profile-field-label">
-                  Konfirmasi Password Baru
-                </label>
-                <div className="profile-field-inner profile-input-pw-wrap">
-                  <IconLock />
-                  <input
-                    className="profile-input"
-                    type={showPw.confirm ? "text" : "password"}
-                    value={pwForm.confirm}
-                    onChange={(e) =>
-                      setPwForm((p) => ({ ...p, confirm: e.target.value }))
-                    }
-                    placeholder="Ulangi password baru"
-                  />
-                  <button
-                    className="profile-pw-toggle"
-                    type="button"
-                    onClick={() =>
-                      setShowPw((s) => ({ ...s, confirm: !s.confirm }))
-                    }
-                  >
-                    {showPw.confirm ? <IconEyeOff /> : <IconEye />}
-                  </button>
-                </div>
-                {pwMismatch && (
-                  <span className="profile-field-hint error">
-                    Password tidak cocok.
+              <div className="profile-form-actions">
+                {pwToast && (
+                  <span className="profile-toast success">
+                    <IconCheck /> Password berhasil diperbarui!
                   </span>
                 )}
-                {!pwMismatch && pwForm.confirm.length > 0 && (
-                  <span className="profile-field-hint success">
-                    ✓ Password cocok.
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div className="profile-form-actions">
-              {pwToast && (
-                <span className="profile-toast success">
-                  <IconCheck /> Password berhasil diperbarui!
-                </span>
-              )}
-              <button
-                className="profile-btn-secondary"
-                onClick={() =>
-                  setPwForm({ current: "", newPw: "", confirm: "" })
-                }
-              >
-                Batal
-              </button>
-              <button
-                className="profile-btn-primary"
-                disabled={!pwCanSubmit}
-                style={
-                  !pwCanSubmit ? { opacity: 0.5, cursor: "not-allowed" } : {}
-                }
-                onClick={handlePwSave}
-              >
-                <IconLock />
-                Perbarui Password
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* ══ PREFERENSI ══ */}
-        <div className="profile-card">
-          <div className="profile-card-header">
-            <div className="profile-card-title">
-              <div className="profile-card-title-icon purple">
-                <IconBell />
-              </div>
-              Notifikasi &amp; Preferensi
-            </div>
-          </div>
-          <div className="profile-card-body">
-            <div className="profile-toggle-row">
-              <div className="profile-toggle-left">
-                <div className="profile-toggle-label">Notifikasi Transaksi</div>
-                <div className="profile-toggle-desc">
-                  Terima notifikasi setiap transaksi selesai
-                </div>
-              </div>
-              <label className="profile-switch">
-                <input
-                  type="checkbox"
-                  checked={prefs.notifTransaksi}
-                  onChange={() =>
-                    setPrefs((p) => ({
-                      ...p,
-                      notifTransaksi: !p.notifTransaksi,
-                    }))
-                  }
-                />
-                <span className="profile-switch-track" />
-              </label>
-            </div>
-
-            <div className="profile-toggle-row">
-              <div className="profile-toggle-left">
-                <div className="profile-toggle-label">
-                  Peringatan Stok Habis
-                </div>
-                <div className="profile-toggle-desc">
-                  Notifikasi saat stok produk kritis (≤5)
-                </div>
-              </div>
-              <label className="profile-switch">
-                <input
-                  type="checkbox"
-                  checked={prefs.notifStok}
-                  onChange={() =>
-                    setPrefs((p) => ({ ...p, notifStok: !p.notifStok }))
-                  }
-                />
-                <span className="profile-switch-track" />
-              </label>
-            </div>
-
-            <div className="profile-toggle-row">
-              <div className="profile-toggle-left">
-                <div className="profile-toggle-label">
-                  Laporan Harian Otomatis
-                </div>
-                <div className="profile-toggle-desc">
-                  Kirim ringkasan laporan setiap pukul 23:00
-                </div>
-              </div>
-              <label className="profile-switch">
-                <input
-                  type="checkbox"
-                  checked={prefs.notifLaporan}
-                  onChange={() =>
-                    setPrefs((p) => ({ ...p, notifLaporan: !p.notifLaporan }))
-                  }
-                />
-                <span className="profile-switch-track" />
-              </label>
-            </div>
-
-            <div className="profile-toggle-row">
-              <div className="profile-toggle-left">
-                <div className="profile-toggle-label">Suara Notifikasi</div>
-                <div className="profile-toggle-desc">
-                  Mainkan suara saat transaksi berhasil
-                </div>
-              </div>
-              <label className="profile-switch">
-                <input
-                  type="checkbox"
-                  checked={prefs.suara}
-                  onChange={() => setPrefs((p) => ({ ...p, suara: !p.suara }))}
-                />
-                <span className="profile-switch-track" />
-              </label>
-            </div>
-
-            <div className="profile-toggle-row">
-              <div className="profile-toggle-left">
-                <div className="profile-toggle-label">Bahasa</div>
-                <div className="profile-toggle-desc">
-                  Pilih bahasa tampilan aplikasi
-                </div>
-              </div>
-              <div
-                className="profile-field-inner profile-select-wrap"
-                style={{ width: 160 }}
-              >
-                <IconGlobe />
-                <select
-                  className="profile-select"
-                  value={prefs.bahasa}
-                  onChange={(e) =>
-                    setPrefs((p) => ({ ...p, bahasa: e.target.value }))
+                <button
+                  className="profile-btn-secondary"
+                  onClick={() =>
+                    setPwForm({ current: "", newPw: "", confirm: "" })
                   }
                 >
-                  <option value="id">Bahasa Indonesia</option>
-                  <option value="en">English</option>
-                </select>
-                <span className="profile-select-arrow">
-                  <IconChevDown />
-                </span>
+                  Batal
+                </button>
+                <button
+                  className="profile-btn-primary"
+                  disabled={!pwCanSubmit}
+                  style={
+                    !pwCanSubmit ? { opacity: 0.5, cursor: "not-allowed" } : {}
+                  }
+                  onClick={handlePwSave}
+                >
+                  <IconLock />
+                  Perbarui Password
+                </button>
               </div>
             </div>
+          </div>
 
-            <div className="profile-form-actions">
-              {prefsToast && (
-                <span className="profile-toast success">
-                  <IconCheck /> Preferensi disimpan!
-                </span>
-              )}
-              <button className="profile-btn-primary" onClick={handlePrefsSave}>
-                <IconSave />
-                Simpan Preferensi
-              </button>
+          {/* ══ PREFERENSI ══ */}
+          <div className="profile-card">
+            <div className="profile-card-header">
+              <div className="profile-card-title">
+                <div className="profile-card-title-icon purple">
+                  <IconBell />
+                </div>
+                Notifikasi &amp; Preferensi
+              </div>
+            </div>
+            <div className="profile-card-body">
+              <div className="profile-toggle-row">
+                <div className="profile-toggle-left">
+                  <div className="profile-toggle-label">
+                    Notifikasi Transaksi
+                  </div>
+                  <div className="profile-toggle-desc">
+                    Terima notifikasi setiap transaksi selesai
+                  </div>
+                </div>
+                <label className="profile-switch">
+                  <input
+                    type="checkbox"
+                    checked={prefs.notifTransaksi}
+                    onChange={() =>
+                      setPrefs((p) => ({
+                        ...p,
+                        notifTransaksi: !p.notifTransaksi,
+                      }))
+                    }
+                  />
+                  <span className="profile-switch-track" />
+                </label>
+              </div>
+
+              <div className="profile-toggle-row">
+                <div className="profile-toggle-left">
+                  <div className="profile-toggle-label">
+                    Peringatan Stok Habis
+                  </div>
+                  <div className="profile-toggle-desc">
+                    Notifikasi saat stok produk kritis (≤5)
+                  </div>
+                </div>
+                <label className="profile-switch">
+                  <input
+                    type="checkbox"
+                    checked={prefs.notifStok}
+                    onChange={() =>
+                      setPrefs((p) => ({ ...p, notifStok: !p.notifStok }))
+                    }
+                  />
+                  <span className="profile-switch-track" />
+                </label>
+              </div>
+
+              <div className="profile-toggle-row">
+                <div className="profile-toggle-left">
+                  <div className="profile-toggle-label">
+                    Laporan Harian Otomatis
+                  </div>
+                  <div className="profile-toggle-desc">
+                    Kirim ringkasan laporan setiap pukul 23:00
+                  </div>
+                </div>
+                <label className="profile-switch">
+                  <input
+                    type="checkbox"
+                    checked={prefs.notifLaporan}
+                    onChange={() =>
+                      setPrefs((p) => ({ ...p, notifLaporan: !p.notifLaporan }))
+                    }
+                  />
+                  <span className="profile-switch-track" />
+                </label>
+              </div>
+
+              <div className="profile-toggle-row">
+                <div className="profile-toggle-left">
+                  <div className="profile-toggle-label">Suara Notifikasi</div>
+                  <div className="profile-toggle-desc">
+                    Mainkan suara saat transaksi berhasil
+                  </div>
+                </div>
+                <label className="profile-switch">
+                  <input
+                    type="checkbox"
+                    checked={prefs.suara}
+                    onChange={() =>
+                      setPrefs((p) => ({ ...p, suara: !p.suara }))
+                    }
+                  />
+                  <span className="profile-switch-track" />
+                </label>
+              </div>
+
+              <div className="profile-toggle-row">
+                <div className="profile-toggle-left">
+                  <div className="profile-toggle-label">Bahasa</div>
+                  <div className="profile-toggle-desc">
+                    Pilih bahasa tampilan aplikasi
+                  </div>
+                </div>
+                <div
+                  className="profile-field-inner profile-select-wrap"
+                  style={{ width: 160 }}
+                >
+                  <IconGlobe />
+                  <select
+                    className="profile-select"
+                    value={prefs.bahasa}
+                    onChange={(e) =>
+                      setPrefs((p) => ({ ...p, bahasa: e.target.value }))
+                    }
+                  >
+                    <option value="id">Bahasa Indonesia</option>
+                    <option value="en">English</option>
+                  </select>
+                  <span className="profile-select-arrow">
+                    <IconChevDown />
+                  </span>
+                </div>
+              </div>
+
+              <div className="profile-form-actions">
+                {prefsToast && (
+                  <span className="profile-toast success">
+                    <IconCheck /> Preferensi disimpan!
+                  </span>
+                )}
+                <button
+                  className="profile-btn-primary"
+                  onClick={handlePrefsSave}
+                >
+                  <IconSave />
+                  Simpan Preferensi
+                </button>
+              </div>
             </div>
           </div>
         </div>
-
-        </div>{/* end profile-two-col */}
+        {/* end profile-two-col */}
 
         {/* ══ SECURE AREA ENTRY ══ */}
         <div className="profile-secure-card">
@@ -1080,9 +1103,8 @@ export default function ProfilePage() {
           <div className="profile-secure-info">
             <div className="profile-secure-title">Secure Area</div>
             <div className="profile-secure-desc">
-              Area terproteksi untuk mengelola data utama toko — kategori,
-              stok, menu, dan transaksi non-penjualan. Diperlukan PIN untuk
-              masuk.
+              Area terproteksi untuk mengelola data utama toko — kategori, stok,
+              menu, dan transaksi non-penjualan. Diperlukan PIN untuk masuk.
             </div>
             <div className="profile-secure-features">
               <span className="profile-secure-feat">Kategori</span>
@@ -1092,7 +1114,10 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          <button className="profile-secure-btn">
+          <button
+            className="profile-secure-btn"
+            onClick={handleEnterSecureArea}
+          >
             <span>Masuk ke Secure Area</span>
             <IconArrowRight />
           </button>
@@ -1100,80 +1125,80 @@ export default function ProfilePage() {
 
         {/* ══ AKTIVITAS + DANGER ZONE (main grid) ══ */}
         <div className="profile-main-grid">
-
-        {/* ══ AKTIVITAS ══ */}
-        <div className="profile-card">
-          <div className="profile-card-header">
-            <div className="profile-card-title">
-              <div className="profile-card-title-icon green">
-                <IconActivity />
-              </div>
-              Aktivitas Terakhir
-            </div>
-          </div>
-          <div className="profile-card-body">
-            <div className="profile-activity-list">
-              {ACTIVITIES.map((a, i) => (
-                <div className="profile-activity-item" key={i}>
-                  <ActivityIcon type={a.icon} color={a.color} />
-                  <div className="profile-activity-info">
-                    <div className="profile-activity-desc">{a.desc}</div>
-                    <div className="profile-activity-meta">{a.meta}</div>
-                  </div>
-                  <div className="profile-activity-time">{a.time}</div>
+          {/* ══ AKTIVITAS ══ */}
+          <div className="profile-card">
+            <div className="profile-card-header">
+              <div className="profile-card-title">
+                <div className="profile-card-title-icon green">
+                  <IconActivity />
                 </div>
-              ))}
+                Aktivitas Terakhir
+              </div>
+            </div>
+            <div className="profile-card-body">
+              <div className="profile-activity-list">
+                {ACTIVITIES.map((a, i) => (
+                  <div className="profile-activity-item" key={i}>
+                    <ActivityIcon type={a.icon} color={a.color} />
+                    <div className="profile-activity-info">
+                      <div className="profile-activity-desc">{a.desc}</div>
+                      <div className="profile-activity-meta">{a.meta}</div>
+                    </div>
+                    <div className="profile-activity-time">{a.time}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* ══ DANGER ZONE ══ */}
+          <div className="profile-danger-zone">
+            <div className="profile-danger-header">
+              <div className="profile-danger-title">
+                <IconWarning />
+                Zona Berbahaya
+              </div>
+            </div>
+
+            <div className="profile-danger-item">
+              <div>
+                <div className="profile-danger-item-label">
+                  Logout dari Semua Perangkat
+                </div>
+                <div className="profile-danger-item-desc">
+                  Akhiri semua sesi aktif di perangkat lain
+                </div>
+              </div>
+              <button
+                className="profile-btn-danger"
+                onClick={() => setDangerModal("logout-all")}
+              >
+                <IconLogout />
+                Logout Semua
+              </button>
+            </div>
+
+            <div className="profile-danger-item">
+              <div>
+                <div className="profile-danger-item-label">Hapus Akun</div>
+                <div className="profile-danger-item-desc">
+                  Hapus akun dan seluruh data secara permanen. Tindakan ini
+                  tidak dapat dibatalkan.
+                </div>
+              </div>
+              <button
+                className="profile-btn-danger"
+                onClick={() => setDangerModal("delete")}
+              >
+                <IconTrash />
+                Hapus Akun
+              </button>
             </div>
           </div>
         </div>
-
-        {/* ══ DANGER ZONE ══ */}
-        <div className="profile-danger-zone">
-          <div className="profile-danger-header">
-            <div className="profile-danger-title">
-              <IconWarning />
-              Zona Berbahaya
-            </div>
-          </div>
-
-          <div className="profile-danger-item">
-            <div>
-              <div className="profile-danger-item-label">
-                Logout dari Semua Perangkat
-              </div>
-              <div className="profile-danger-item-desc">
-                Akhiri semua sesi aktif di perangkat lain
-              </div>
-            </div>
-            <button
-              className="profile-btn-danger"
-              onClick={() => setDangerModal("logout-all")}
-            >
-              <IconLogout />
-              Logout Semua
-            </button>
-          </div>
-
-          <div className="profile-danger-item">
-            <div>
-              <div className="profile-danger-item-label">Hapus Akun</div>
-              <div className="profile-danger-item-desc">
-                Hapus akun dan seluruh data secara permanen. Tindakan ini tidak
-                dapat dibatalkan.
-              </div>
-            </div>
-            <button
-              className="profile-btn-danger"
-              onClick={() => setDangerModal("delete")}
-            >
-              <IconTrash />
-              Hapus Akun
-            </button>
-          </div>
-        </div>
-
-        </div>{/* end profile-main-grid */}
-      </div>{/* end profile-container */}
+        {/* end profile-main-grid */}
+      </div>
+      {/* end profile-container */}
 
       {/* ══ CONFIRM MODAL ══ */}
       {dangerModal !== "" && (

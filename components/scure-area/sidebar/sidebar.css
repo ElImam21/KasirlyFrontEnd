@@ -1,0 +1,265 @@
+/* sidebar.css - Kasirly Secure Area Sidebar */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --sa-black: #0a0807;
+  --sa-black-2: #15110c;
+  --sa-black-3: #211a12;
+  --sa-gold: #d1a76a;
+  --sa-gold-light: #f2d9a8;
+  --sa-gold-deep: #a9803f;
+  --sa-orange: #ff7a29;
+  --sa-orange-deep: #b8460e;
+  --sa-cream: #f6ecd9;
+  --sa-text-muted: rgba(246, 236, 217, 0.55);
+  --sa-border: rgba(209, 167, 106, 0.22);
+  --sa-gradient-gold: linear-gradient(135deg, #f2d9a8 0%, #d1a76a 45%, #ff7a29 80%, #b8460e 100%);
+  --sa-font-display: 'Cormorant Garamond', serif;
+  --sa-font-body: 'Manrope', sans-serif;
+}
+
+/* ─── Sidebar Shell ─── */
+.sa-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 264px;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(209, 167, 106, 0.09) 0%, transparent 60%),
+    linear-gradient(180deg, var(--sa-black-2) 0%, var(--sa-black) 55%);
+  border-right: 1px solid var(--sa-border);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+}
+
+.sa-sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 28px 18px 20px;
+}
+
+/* ─── Brand ─── */
+.sa-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 6px 22px;
+}
+
+.sa-brand-mark {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--sa-gradient-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sa-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--sa-black);
+  box-shadow: 0 6px 20px rgba(255, 122, 41, 0.25);
+}
+
+.sa-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.sa-brand-name {
+  font-family: var(--sa-font-display);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 1.5px;
+  color: var(--sa-cream);
+}
+
+.sa-brand-tag {
+  font-family: var(--sa-font-body);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: var(--sa-gold);
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.sa-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--sa-border) 20%, var(--sa-border) 80%, transparent);
+  margin-bottom: 20px;
+}
+
+/* ─── Nav ─── */
+.sa-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.sa-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--sa-text-muted);
+  font-family: var(--sa-font-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  overflow: hidden;
+  transition: color 0.2s, background 0.2s;
+}
+
+.sa-nav-item:hover {
+  color: var(--sa-gold-light);
+  background: rgba(209, 167, 106, 0.08);
+}
+
+.sa-nav-icon {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sa-nav-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+}
+
+.sa-nav-item.active {
+  color: var(--sa-black);
+  background: var(--sa-gradient-gold);
+  box-shadow: 0 6px 18px rgba(184, 70, 14, 0.3);
+}
+
+.sa-nav-item.active .sa-nav-label {
+  position: relative;
+  z-index: 1;
+}
+
+/* Shimmer sweep signature — only on the active item */
+.sa-nav-item.active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: translateX(-120%) skewX(-20deg);
+  animation: sa-shimmer-sweep 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sa-shimmer-sweep {
+  0%   { transform: translateX(-120%) skewX(-20deg); opacity: 0; }
+  8%   { opacity: 0.7; }
+  24%  { transform: translateX(280%) skewX(-20deg); opacity: 0; }
+  100% { transform: translateX(280%) skewX(-20deg); opacity: 0; }
+}
+
+/* ─── Footer: Secure Badge + Exit ─── */
+.sa-sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--sa-border);
+}
+
+.sa-secure-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(209, 167, 106, 0.07);
+  border: 1px solid var(--sa-border);
+  font-family: var(--sa-font-body);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--sa-gold-light);
+  letter-spacing: 0.2px;
+}
+
+.sa-secure-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+  animation: sa-pulse 2s ease-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes sa-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+.sa-exit-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-family: var(--sa-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sa-text-muted);
+  transition: color 0.2s, background 0.2s;
+}
+
+.sa-exit-link:hover {
+  color: var(--sa-cream);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sa-exit-link svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+/* ─── Responsive: icon-only rail ─── */
+@media (max-width: 1024px) {
+  .sa-sidebar {
+    width: 76px;
+  }
+  .sa-brand-text,
+  .sa-nav-label,
+  .sa-brand-tag,
+  .sa-secure-badge span,
+  .sa-exit-link span {
+    display: none;
+  }
+  .sa-brand {
+    justify-content: center;
+    padding: 0 0 22px;
+  }
+  .sa-nav-item {
+    justify-content: center;
+    padding: 12px;
+  }
+  .sa-secure-badge,
+  .sa-exit-link {
+    justify-content: center;
+  }
+}
